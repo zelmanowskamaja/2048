@@ -10,9 +10,9 @@ namespace tw
 		tileSize = (w - FIELD_MARGIN * 2 - TILE_MARGIN * (FIELD_WIDTH - 1)) / FIELD_WIDTH;
 		animState = false;
 
-		if(!font.loadFromFile("ClearSans.ttf"))                             // moze byc konieczne wprowadzenie adresu bezposredniego 
-		{                                                                   // np. "C:/Users/Admin/Desktop/ClearSans.ttf"
-			printf("Failed to load ClearSans.ttf\n");                       // nalezy wtedy uzyc '/', nie '\'
+		if(!font.loadFromFile("ClearSans.ttf"))                             
+		{                                                                   
+			printf("Failed to load ClearSans.ttf\n");                       
 		}
 		Reset();
 	}
@@ -91,7 +91,7 @@ namespace tw
 		sf::RectangleShape tile;
 		tile.setSize(sf::Vector2f(tileSize, tileSize));
 		
-		for(int x = 0; x < FIELD_WIDTH; x++) // wyswietlanie wszystkich pol
+		for(int x = 0; x < FIELD_WIDTH; x++) 
 		{
 			for(int y = 0; y < FIELD_HEIGHT; y++) 
 			{
@@ -100,7 +100,7 @@ namespace tw
 				
 				tgt.draw(tile);
 
-				if(map[x][y] != 0)  // jezeli pole nie jest puste, zmien liczbe i kolor odpowiednio, wedlug wartosci
+				if(map[x][y] != 0) 
 				{
 					text.setCharacterSize(getTextSize(map[x][y]));
 					text.setString(getText(map[x][y]));
@@ -147,7 +147,7 @@ namespace tw
 		int availableCount = 0;
 		sf::Vector2i availableMoves[FIELD_WIDTH * FIELD_HEIGHT];
 
-		for(int x = 0; x < FIELD_WIDTH; x++) // licznik mozliwych ruchow
+		for(int x = 0; x < FIELD_WIDTH; x++) 
 		{
 			for(int y = 0; y < FIELD_HEIGHT; y++) 
 			{
@@ -159,7 +159,7 @@ namespace tw
 			}
 		}
 
-		if(availableCount == 0) // brak mozliwosci ruchu, koniec gry
+		if(availableCount == 0) 
 		{
 			Reset();
 			return;
@@ -173,7 +173,7 @@ namespace tw
 
 	void Game::Reset()
 	{
-		for(int x = 0; x < FIELD_WIDTH; x++) // zmienia wszystkie pola na puste
+		for(int x = 0; x < FIELD_WIDTH; x++) 
 		{
 			for(int y = 0; y < FIELD_HEIGHT; y++)
 			{
@@ -187,25 +187,25 @@ namespace tw
 	{
 		static const sf::Color colors[] = 
 		{
-			sf::Color(238, 228, 218, 97),		// puste
-			sf::Color(238, 228, 218),			// 2^1 == 2
-			sf::Color(237, 224, 200),			// 2^2 == 4
-			sf::Color(242, 177, 121),			// 2^3 == 8
-			sf::Color(245, 149, 99),			// 2^4 == 16
-			sf::Color(246, 124, 95),			// 2^5 == 32
-			sf::Color(246, 94, 59),				// 2^6 == 64
-			sf::Color(237, 207, 114),			// 2^7 == 128
-			sf::Color(237, 204, 97),			// 2^8 == 256
-			sf::Color(237, 200, 80),			// 2^9 == 512
-			sf::Color(237, 197, 63),			// 2^10 == 1024
-			sf::Color(237, 194, 46),			// 2^11 == 2048
+			sf::Color(238, 228, 218, 97),		
+			sf::Color(238, 228, 218),			
+			sf::Color(237, 224, 200),			
+			sf::Color(242, 177, 121),			
+			sf::Color(245, 149, 99),		
+			sf::Color(246, 124, 95),			
+			sf::Color(246, 94, 59),				
+			sf::Color(237, 207, 114),			
+			sf::Color(237, 204, 97),			
+			sf::Color(237, 200, 80),			
+			sf::Color(237, 197, 63),			
+			sf::Color(237, 194, 46),			
 		};
 		return colors[tile];
 	}
 
 	sf::Color Game::getTextColor(char tile)
 	{
-		if(tile >= 3) // tile >= 3, czyli wartosc >= 8 (poniewaz 2^3 == 8)
+		if(tile >= 3) 
 		{
 			return sf::Color(249, 246, 242);
 		}
@@ -215,33 +215,33 @@ namespace tw
 
 	std::string Game::getText(char tile)
 	{
-		// mala optymalizacja - nie trzeba uzywac std::pow() i obliczac za kazdym razem
+		
 		static const std::string text[] = 
 		{
-			"",		        // puste
-			"2",			// 2^1 == 2
-			"4",			// 2^2 == 4
-			"8",			// 2^3 == 8
-			"16",			// 2^4 == 16
-			"32",			// 2^5 == 32
-			"64",			// 2^6 == 64
-			"128",			// 2^7 == 128
-			"256",			// 2^8 == 256
-			"512",			// 2^9 == 512
-			"1024",			// 2^10 == 1024
-			"2048"			// 2^11 == 2048
+			"",		       
+			"2",			
+			"4",			
+			"8",			
+			"16",			
+			"32",			
+			"64",			
+			"128",			
+			"256",			
+			"512",			
+			"1024",			
+			"2048"			
 		};
 		return text[tile];
 	}
 
 	int Game::getTextSize(char tile)
 	{
-		if(tile >= 10) // najmniejszy rozmiar dla liczb 4-cyfrowych
+		if(tile >= 10) 
 		{
 			return 35;
 		}
 			
-		else if(tile >= 7) // mniejszy rozmiar dla liczb 3-cyfrowych
+		else if(tile >= 7) 
 		{
 			return 45;
 		}
@@ -373,7 +373,7 @@ namespace tw
 		{
 			for(int y = 0; y < FIELD_HEIGHT; y++) 
 			{
-				if(tempMap[x][y] == 0) // jezeli pole jest puste
+				if(tempMap[x][y] == 0) 
 				{
 					isFilled = false;
 					isGameOver = false;
@@ -406,7 +406,7 @@ namespace tw
 			}
 		}
 
-		if(isGameOver) // koniec gry, reset
+		if(isGameOver) 
 		{
 			Reset();
 		}
@@ -419,10 +419,10 @@ namespace tw
 
 		tempMap[f.x][f.y] = 0;
 
-		if(destVal == srcVal) // jezeli polaczona dwa pola o tej samej wartosci
+		if(destVal == srcVal) 
 		{
-			tempMap[t.x][t.y] = srcVal + 1; // podwojenie wartosci pola, scalenie pol
-			if(srcVal + 1 == 12) // jezeli polaczono dwa pola o wartosci 2048, koniec gry, reset
+			tempMap[t.x][t.y] = srcVal + 1; 
+			if(srcVal + 1 == 12) 
 			{
 				Reset();
 			}
